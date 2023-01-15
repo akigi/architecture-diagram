@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- d3.js -->
+    <!-- <script src="https://d3js.org/d3.v3.min.js"></script> -->
+    <script src="extern/d3.v3.min.js"></script>
+
+    <!-- cola.js -->
+    <script src="extern/cola.min.js"></script>
+
+    <!-- graphlib -->
+    <script src="extern/graphlib-dot.min.js"></script>
+
+
+    <title>cola test!!</title>
+
+
+    <style>
+        @import url(extern/style.css);
+
+        .node {
+            cursor: move;
+            fill: #404040;
+            rx: 3;
+            ry: 3;
+        }
+
+        .group {
+            stroke: none;
+            fill: #ffc0b0;
+            stroke-width: 6;
+            rx: 5;
+            ry: 5;
+            stroke: #ffc0b0;
+        }
+
+        .link {
+            stroke: darkslategrey;
+            fill: none;
+            stroke-width: 2px;
+            stroke-opacity: 1;
+            marker-end: url(#end-arrow);
+        }
+
+        .linkarrow {
+            stroke: darkslategrey;
+            fill: darkslategrey;
+            stroke-width: 0px;
+            stroke-opacity: 1;
+            marker-end: url(#end-arrow);
+        }
+
+        .linkoutline {
+            stroke: white;
+            stroke-width: 4px;
+            fill: none;
+        }
+
+        .linkarrowoutline {
+            stroke: none;
+            stroke-width: 1px;
+            fill: white;
+        }
+
+        .label {
+            fill: white;
+            font-family: Verdana;
+            font-size: 15px;
+            text-anchor: middle;
+            cursor: move;
+        }
+
+        .swatchlabel {
+            font-family: Verdana;
+            font-size: 15px;
+        }
+
+        .ghost {
+            fill: red;
+            fill-opacity: 0.5;
+            stroke: red;
+            stroke-width: 2;
+        }
+    </style>
+
+</head>
+
+<body>
+    
+    <div>
+        <p>Ref1: <a href="https://marvl.infotech.monash.edu/webcola/examples/dotpowergraph.html">https://marvl.infotech.monash.edu/webcola/examples/dotpowergraph.html</a></p>
+        <p>Ref2: <a href="https://github.com/tgdwyer/WebCola">https://github.com/tgdwyer/WebCola</a></p>
+    </div>
+
+    <h1>test</h1>
+
+
+    <script src="mygraph.js"></script>
+
+</body>
+
+</html>
