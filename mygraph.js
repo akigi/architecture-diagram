@@ -57,15 +57,16 @@ function gridify(svg, pgLayout, margin, groupMargin) {
         .attr('height', d => d.routerNode.bounds.height() - groupPadding);
 }
 
-
 function createPowerGraph(inputjson) {
-    // svg
+    // size
     var size = [700, 700];
-    var svg = makeSVG(false, size[0], size[1]);
     var grouppadding = 0.01;
     var margin = 20;
     var groupMargin = 15;
     
+    // svg
+    var svg = makeSVG(false, size[0], size[1]);
+
     // inputJson.nodes
     inputjson.nodes.forEach(v => {
         v.width = 70;
@@ -74,6 +75,7 @@ function createPowerGraph(inputjson) {
 
     // pgLayout
     var pgLayout = cola.powerGraphGridLayout(inputjson, size, grouppadding);
+    pgLayout.cola._nodes[0].x = 0
     
     // debug
     console.log("inputjson", inputjson)
@@ -101,7 +103,6 @@ function createPowerGraph(inputjson) {
         .data(pgLayout.powerGraph.groups)
         .enter().append("rect")
         .attr("class", "group");
-    
     
     // node
     var node = svg.selectAll(".node")
@@ -157,6 +158,7 @@ function createPowerGraph(inputjson) {
     function dragEnd(d) {
         let dropPos = getDragPos(d);
         delete eventStart[d.routerNode.id];
+        console.log("d", d)
         d.x = dropPos.x;
         d.y = dropPos.y;
         ghosts.forEach(g => g.remove());
@@ -178,17 +180,24 @@ function createPowerGraph(inputjson) {
 
 // Do
 a = d3.text("graphdata.dot", function (f) {
+    // digraph
     var digraph = graphlibDot.read(f);
+    
     console.log("digraph", digraph)
 
+    // nodes
     var nodeNames = digraph.nodes();
+    console.log("digraph.nodes()",digraph.nodes())
     var nodes = new Array(nodeNames.length);
     nodeNames.forEach(function (name, i) {
         var v = nodes[i] = digraph._nodes[nodeNames[i]];
         v.id = i;
         v.name = name;
     });
+
+    // edges
     const dedges = (digraph.edges());
+    console.log("digraph.edges()", digraph.edges())
     let edges = [];
     for (let edge of dedges) {
         edges.push({
@@ -197,13 +206,12 @@ a = d3.text("graphdata.dot", function (f) {
         });
     }
 
+    // createPowerGraph
     let arg = {
         nodes: nodes,
         links: edges
     };
-
     console.log("arg", arg);
-
     createPowerGraph(arg);
 });
 
